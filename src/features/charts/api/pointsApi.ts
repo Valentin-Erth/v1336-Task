@@ -1,8 +1,8 @@
-import axios from "axios";
+import {instance} from "@/common/instance/instance.ts";
 
 export const pointsApi={
     getPointsFast(points:string){
-        return axios.get<ResponsePointsType[]>(`https://v1336-api-test.onrender.com/getPointsFast?points=${points}`)
+        return instance.get<ResponsePointsType[]>(`getPointsFast?points=${points}`)
     }
 }
 // types

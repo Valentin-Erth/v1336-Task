@@ -8,17 +8,17 @@ import HighchartsReact from 'highcharts-react-official'
 import s from './charts.module.css'
 import {selectStatus} from "@/app/app.selector.ts";
 import { toast } from 'react-toastify';
+import {selectPoints} from "@/features/charts/model/points.selector.ts";
 
 export const Charts = () => {
     const dispatch = useAppDispatch()
     const [points, setPoints] = useState<number | null>(1000)
-    const data = useAppSelector((state) => state.points.pointsFast);
+    const data = useAppSelector(selectPoints);
     const status = useAppSelector(selectStatus)
     const handleLoadPoints = () => {
         dispatch(pointsThunks.fetchPointsFast(String(points)))
             .unwrap()
             .then(()=>{
-            // debugger
             toast.success('success load')
         })
             // .catch((err)=>{

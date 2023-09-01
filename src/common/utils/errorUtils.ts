@@ -13,7 +13,7 @@ export const handleServerAppError =(data:any, dispatch: Dispatch) => {
 
 
 export const handleServerNetworkError = (err: unknown, dispatch: Dispatch): void => {
-  debugger
+  // debugger
   let errorMessage = "Some error occurred";
   if (axios.isAxiosError(err)) {
     errorMessage = err.response?.data?.message || err?.message || errorMessage;

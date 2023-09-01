@@ -1,30 +1,30 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {appActions} from "@/app/app.slice.ts";
-import {pointsApi, ResponsePointsType} from "@/features/charts/api/pointsApi.ts";
 import {handleServerNetworkError} from "@/common/utils/errorUtils.ts";
+import {brigadesApi, BrigadeType} from "@/features/brigades/api/brigadesApi.ts";
 
 
 const slice = createSlice({
-    name: "points",
+    name: "brigades",
     initialState: {
-        pointsFast: [] as ResponsePointsType[]
+        brigades: [] as BrigadeType[]
     },
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchPointsFast.fulfilled, (state, action) => {
+            .addCase(getBrigades.fulfilled, (state, action) => {
                 if (action.payload) {
-                    state.pointsFast = action.payload
+                    state.brigades = action.payload
                 }
             })
     }
 })
 
-const fetchPointsFast = createAsyncThunk('points/fetchPointsFast', async (arg: string, thunkAPI) => {
+const getBrigades = createAsyncThunk('brigades/getBrigades', async (_, thunkAPI) => {
     const {dispatch, rejectWithValue} = thunkAPI;
     dispatch(appActions.setAppStatus("loading"))
     try {
-        const res = await pointsApi.getPointsFast(arg)
+        const res = await brigadesApi.getBrigades()
         console.log(res)
         if (res.status === 200) {
             dispatch(appActions.setAppStatus("succeeded"))
@@ -36,5 +36,5 @@ const fetchPointsFast = createAsyncThunk('points/fetchPointsFast', async (arg: s
         return rejectWithValue(null)
     }
 })
-export const pointsSlice = slice.reducer
-export const pointsThunks = {fetchPointsFast}
+export const brigadesSlice = slice.reducer
+export const brigadesThunks = {getBrigades}
