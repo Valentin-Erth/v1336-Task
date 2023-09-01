@@ -1,8 +1,9 @@
 .box {
+    margin-top: 40px;
     padding: 20px;
     /*display: flex;*/
     /*justify-content: center;*/
     /*align-items: center;*/
     height: 100vh;
-
 }
+

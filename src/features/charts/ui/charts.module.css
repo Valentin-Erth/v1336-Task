@@ -3,7 +3,15 @@
     /*flex-direction: column;*/
     /*justify-content: center;*/
     /*align-items: center;*/
+    margin: 20px;
     padding: 30px;
 
     border: 1px solid black;
+}
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
 }

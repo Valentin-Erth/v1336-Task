@@ -1,16 +1,18 @@
 import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
 import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
-import {Button, InputNumber} from "antd";
+import {Button, InputNumber, Progress} from "antd";
 import {useState} from "react";
 import {pointsThunks} from "@/features/charts/model/points.slice.ts";
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import s from './charts.module.css'
+import {selectStatus} from "@/app/app.selector.ts";
 
 export const Charts = () => {
     const dispatch = useAppDispatch()
     const [points, setPoints] = useState<number | null>(1000)
     const data = useAppSelector((state) => state.points.pointsFast);
+    const status = useAppSelector(selectStatus)
     const handleLoadPoints = () => {
         dispatch(pointsThunks.fetchPointsFast(String(points)));
     }
@@ -48,14 +50,21 @@ export const Charts = () => {
         }]
     };
     return (
-        <div className={s.container}>
-            <div>
-                <span>кол-во точек :</span> <InputNumber min={1} max={1000000} defaultValue={1000}
-                                                         onChange={setPoints}/>
-                <Button onClick={handleLoadPoints}>загрузить точки</Button>
+        <div>
+            <div style={{height: "4px"}}>
+                {status === "loading" && (
+                    <Progress percent={status ? 100 : 0} status={status ? "active" : "normal"} className={s.progressBar} />)}
             </div>
-            <HighchartsReact highcharts={Highcharts} options={options}/>
+
+            <div className={s.container}>
+                <div>
+                    <span>кол-во точек :</span> <InputNumber min={1} max={1000000} defaultValue={1000}                                                              onChange={setPoints}/>
+                    <Button onClick={handleLoadPoints}>загрузить точки</Button>
+                </div>
+                <HighchartsReact highcharts={Highcharts} options={options}/>
+            </div>
         </div>
+
     );
 };
 
