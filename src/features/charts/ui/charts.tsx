@@ -7,6 +7,7 @@ import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import s from './charts.module.css'
 import {selectStatus} from "@/app/app.selector.ts";
+import { toast } from 'react-toastify';
 
 export const Charts = () => {
     const dispatch = useAppDispatch()
@@ -14,7 +15,15 @@ export const Charts = () => {
     const data = useAppSelector((state) => state.points.pointsFast);
     const status = useAppSelector(selectStatus)
     const handleLoadPoints = () => {
-        dispatch(pointsThunks.fetchPointsFast(String(points)));
+        dispatch(pointsThunks.fetchPointsFast(String(points)))
+            .unwrap()
+            .then(()=>{
+            // debugger
+            toast.success('success load')
+        })
+            // .catch((err)=>{
+            //     toast.error(err)
+            // })
     }
     const options = {
         chart: {
@@ -53,12 +62,13 @@ export const Charts = () => {
         <div>
             <div style={{height: "4px"}}>
                 {status === "loading" && (
-                    <Progress percent={status ? 100 : 0} status={status ? "active" : "normal"} className={s.progressBar} />)}
+                    <Progress percent={status ? 100 : 0} status={status ? "active" : "normal"}
+                              className={s.progressBar}/>)}
             </div>
 
             <div className={s.container}>
                 <div>
-                    <span>кол-во точек :</span> <InputNumber min={1} max={1000000} defaultValue={1000}                                                              onChange={setPoints}/>
+                    <span>кол-во точек :</span> <InputNumber min={1} max={1000000} defaultValue={1000} onChange={setPoints}/>
                     <Button onClick={handleLoadPoints}>загрузить точки</Button>
                 </div>
                 <HighchartsReact highcharts={Highcharts} options={options}/>

@@ -10,9 +10,9 @@ const slice = createSlice({
         pointsFast: [] as ResponsePointsType[]
     },
     reducers: {},
-    extraReducers:(builder)=>{
+    extraReducers: (builder) => {
         builder
-            .addCase(fetchPointsFast.fulfilled, (state, action)=>{
+            .addCase(fetchPointsFast.fulfilled, (state, action) => {
                 if (action.payload) {
                     state.pointsFast = action.payload
                 }
@@ -20,21 +20,22 @@ const slice = createSlice({
     }
 })
 
-const fetchPointsFast = createAsyncThunk('points/fetchPointsFast', async (arg:string, thunkAPI)=>{
-    const { dispatch, rejectWithValue } = thunkAPI;
+const fetchPointsFast = createAsyncThunk('points/fetchPointsFast', async (arg: string, thunkAPI) => {
+    const {dispatch, rejectWithValue} = thunkAPI;
     dispatch(appActions.setAppStatus("loading"))
     try {
-        const res= await pointsApi.getPointsFast(arg)
+        const res = await pointsApi.getPointsFast(arg)
         console.log(res)
-        if (res.status===200){
+        if (res.status === 200) {
             dispatch(appActions.setAppStatus("succeeded"))
             return res.data
         }
 
-    } catch (e){
+    } catch (e) {
+        console.log(e)
         handleServerNetworkError(e, dispatch)
         return rejectWithValue(null)
     }
 })
-export const pointsSlice=slice.reducer
-export const pointsThunks={fetchPointsFast}
+export const pointsSlice = slice.reducer
+export const pointsThunks = {fetchPointsFast}
