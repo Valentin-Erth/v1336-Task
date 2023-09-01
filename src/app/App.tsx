@@ -1,11 +1,11 @@
-import './App.css'
-
+import './App.module.css'
+import {Charts} from "@/features/charts/ui/charts.tsx";
+import s from './App.module.css'
 function App() {
 
   return (
-   <div>
-       <h1>V1336</h1>
-
+   <div className={s.box}>
+       <Charts/>
    </div>
   )
 }
