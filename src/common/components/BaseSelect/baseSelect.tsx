@@ -3,7 +3,7 @@ import s from './baseSelect.module.css'
 type OptionType = { value: number; label: string }
 type BaseSelectPropsType={
     title: string
-    options?: OptionType[]
+    options: OptionType[]
     onChange?: (value: number | undefined) => void
     }
 export const BaseSelect = ({options,title,onChange}:BaseSelectPropsType) => {
@@ -13,7 +13,7 @@ export const BaseSelect = ({options,title,onChange}:BaseSelectPropsType) => {
             <Select
             defaultValue={null}
             style={{width: "150px"}}
-            allowClear
+            // allowClear
             options={options}
             onChange={onChange}/>
         </div>

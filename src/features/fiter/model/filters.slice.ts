@@ -18,9 +18,9 @@ const slice = createSlice({
                     state.departments = action.payload
                 }
             })
-            .addCase(getConnectStatus.fulfilled,(state, action)=>{
+            .addCase(getConnectStatus.fulfilled, (state, action) => {
                 if (action.payload) {
-                    state.connectStatus=action.payload
+                    state.connectStatus = action.payload
                 }
             })
     }
@@ -31,7 +31,6 @@ const getDepartments = createAsyncThunk('filters/departments', async (_, thunkAP
     dispatch(appActions.setAppStatus("loading"))
     try {
         const res = await filterApi.getDepartments()
-        console.log(res)
         if (res.status === 200) {
             dispatch(appActions.setAppStatus("succeeded"))
             return res.data
@@ -46,7 +45,6 @@ const getConnectStatus = createAsyncThunk('filters/connectStatus', async (_, thu
     dispatch(appActions.setAppStatus("loading"))
     try {
         const res = await filterApi.getConnectStatus()
-        console.log(res)
         if (res.status === 200) {
             dispatch(appActions.setAppStatus("succeeded"))
             return res.data

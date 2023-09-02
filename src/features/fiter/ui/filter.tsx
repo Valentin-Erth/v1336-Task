@@ -6,7 +6,12 @@ import {useEffect} from "react";
 import {filterThunks} from "@/features/fiter/model/filters.slice.ts";
 // import {toast} from "react-toastify";
 import s from './filter.module.css'
-import {brigadesActions} from "@/features/brigades/model/brigades.slice.ts";
+import {
+    brigadesThunks, resetFilterConnectStatus, resetFilterDepartment,
+    setFilterConnectStatus,
+    setFilterDepartment
+} from "@/features/brigades/model/brigades.slice.ts";
+
 export const FilterSelect = () => {
     const dispatch = useAppDispatch()
     const departments = useAppSelector(selectDepartments)
@@ -15,14 +20,25 @@ export const FilterSelect = () => {
     useEffect(() => {
         dispatch(filterThunks.getDepartments())
         dispatch(filterThunks.getConnectStatus())
-    },[])
+    }, [])
     const departmentOptions = departments.map(department => ({value: department.id, label: department.name}));
     const connectStatusOptions = connectStatus.map(status => ({value: status.connectionStateId, label: status.name}));
-    const handleDepartmentChange = () => {
-        // Handle department change
+    const handleDepartmentChange = (value: any) => {
+        if (value === null) {
+            dispatch(resetFilterDepartment());
+        } else {
+            dispatch(setFilterDepartment(value));
+        }
+        dispatch(brigadesThunks.getFilteredBrigades());
     };
-    const handleConnectStatusChange = (value:any) => {
-       dispatch(brigadesActions.setFilter(value))
+    const handleConnectStatusChange = (value: any) => {
+        if (value === null) {
+            dispatch(resetFilterConnectStatus());
+        } else {
+            dispatch(setFilterConnectStatus(value));
+        }
+        dispatch(brigadesThunks.getFilteredBrigades());
+
     };
 
     return (

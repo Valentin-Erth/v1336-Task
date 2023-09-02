@@ -1,27 +1,30 @@
-import  {useEffect} from "react";
-import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
-import {brigadesThunks} from "@/features/brigades/model/brigades.slice.ts";
 import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 import {Brigada} from "@/features/brigades/ui/brigada/brigada.tsx";
 import s from './brigades.module.css'
 import {Button} from "antd";
-import {selectBrigades, selectFilter} from "@/features/brigades/model/brigades.selector.ts";
-import { ArrowRightOutlined } from '@ant-design/icons';
+import {ArrowRightOutlined} from '@ant-design/icons';
 import {NavLink} from "react-router-dom";
+import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
+import {selectfilteredBrigades} from "@/features/brigades/model/brigades.selector.ts";
+import {useEffect} from "react";
+import {brigadesThunks} from "@/features/brigades/model/brigades.slice.ts";
 import {toast} from "react-toastify";
+
+
 export const Brigades = () => {
     const dispatch = useAppDispatch()
-    const brigades = useAppSelector(selectBrigades);
-    const filter = useAppSelector(selectFilter);
-    console.log(filter)
-    const filteredBrigades = filter !== null ? brigades.filter(brigade => brigade.connectionStateId === filter) : brigades;
+    const filteredBrigades = useAppSelector(selectfilteredBrigades);
+
     useEffect(() => {
-        dispatch(brigadesThunks.getBrigades()).unwrap().then(()=>toast.success('sucsess load'))
-    }, [])
+            dispatch(brigadesThunks.getBrigades()).unwrap().then(() => toast.success('sucsess load'))
+        },
+        []);
+
     return (
         <div>
-            <div>
-                <Button className={s.btn} icon={<ArrowRightOutlined />}>  <NavLink to={'charts'}>Перейти на график</NavLink> </Button>
+            <div style={{ maxHeight: '100vh', overflowY: 'scroll' }}>
+                <Button className={s.btn} icon={<ArrowRightOutlined/>}> <NavLink to={'charts'}>Перейти на
+                    график</NavLink> </Button>
             </div>
             <div className={s.container}>
                 {filteredBrigades && filteredBrigades.map(el => (
