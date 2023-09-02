@@ -1,0 +1,17 @@
+.description {
+    display: flex;
+    flex-direction: column;
+}
+
+.subTitle {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    color: #000000d9;
+    font-weight: 500;
+}
+.green{
+    color: green;
+}
+.red{
+    color: red;
+}

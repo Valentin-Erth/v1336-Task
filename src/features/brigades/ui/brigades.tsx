@@ -3,7 +3,7 @@ import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
 import {brigadesThunks} from "@/features/brigades/model/brigades.slice.ts";
 import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 import {Brigada} from "@/features/brigades/ui/brigada/brigada.tsx";
-import s from './brigada/brigades.module.css'
+import s from './brigades.module.css'
 import {Button} from "antd";
 import {selectBrigades} from "@/features/brigades/model/brigades.selector.ts";
 import { ArrowRightOutlined } from '@ant-design/icons';
