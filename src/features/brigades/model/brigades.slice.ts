@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {appActions} from "@/app/app.slice.ts";
 import {handleServerNetworkError} from "@/common/utils/errorUtils.ts";
 import {brigadesApi, BrigadeType} from "@/features/brigades/api/brigadesApi.ts";
@@ -7,9 +7,14 @@ import {brigadesApi, BrigadeType} from "@/features/brigades/api/brigadesApi.ts";
 const slice = createSlice({
     name: "brigades",
     initialState: {
-        brigades: [] as BrigadeType[]
+        brigades: [] as BrigadeType[],
+        filter: null as number | null
     },
-    reducers: {},
+    reducers: {
+        setFilter: (state, action: PayloadAction<number | null>) => {
+            state.filter = action.payload
+    },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getBrigades.fulfilled, (state, action) => {
@@ -38,3 +43,4 @@ const getBrigades = createAsyncThunk('brigades/getBrigades', async (_, thunkAPI)
 })
 export const brigadesSlice = slice.reducer
 export const brigadesThunks = {getBrigades}
+export const brigadesActions = slice.actions

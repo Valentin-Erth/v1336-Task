@@ -6,10 +6,12 @@ import {useEffect} from "react";
 import {filterThunks} from "@/features/fiter/model/filters.slice.ts";
 // import {toast} from "react-toastify";
 import s from './filter.module.css'
+import {brigadesActions} from "@/features/brigades/model/brigades.slice.ts";
 export const FilterSelect = () => {
     const dispatch = useAppDispatch()
     const departments = useAppSelector(selectDepartments)
     const connectStatus = useAppSelector(selectConnectStatus)
+
     useEffect(() => {
         dispatch(filterThunks.getDepartments())
         dispatch(filterThunks.getConnectStatus())
@@ -19,8 +21,8 @@ export const FilterSelect = () => {
     const handleDepartmentChange = () => {
         // Handle department change
     };
-    const handleConnectStatusChange = () => {
-        // Handle connect status change
+    const handleConnectStatusChange = (value:any) => {
+       dispatch(brigadesActions.setFilter(value))
     };
 
     return (
