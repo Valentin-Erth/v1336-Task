@@ -1,5 +1,5 @@
 import {Select} from "antd";
-
+import s from './baseSelect.module.css'
 type OptionType = { value: number; label: string }
 type BaseSelectPropsType={
     title: string
@@ -8,11 +8,11 @@ type BaseSelectPropsType={
     }
 export const BaseSelect = ({options,title,onChange}:BaseSelectPropsType) => {
     return (
-        <div>
+        <div className={s.container}>
             <span>{title}</span>
             <Select
             defaultValue={null}
-            style={{width: "200"}}
+            style={{width: "150px"}}
             allowClear
             options={options}
             onChange={onChange}/>

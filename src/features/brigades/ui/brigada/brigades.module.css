@@ -2,7 +2,9 @@
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
-    /*padding-top: 110px;*/
+    padding: 20px;
+    width: 100%;
+    background-color: aliceblue;
 }
 .btn {
     position: absolute;
