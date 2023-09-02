@@ -9,6 +9,8 @@ import s from './charts.module.css'
 import {selectStatus} from "@/app/app.selector.ts";
 import { toast } from 'react-toastify';
 import {selectPoints} from "@/features/charts/model/points.selector.ts";
+import {NavLink} from "react-router-dom";
+import { ArrowLeftOutlined } from '@ant-design/icons';
 
 export const Charts = () => {
     const dispatch = useAppDispatch()
@@ -70,6 +72,7 @@ export const Charts = () => {
                 <div>
                     <span>кол-во точек :</span> <InputNumber min={1} max={1000000} defaultValue={1000} onChange={setPoints}/>
                     <Button onClick={handleLoadPoints}>загрузить точки</Button>
+                    <Button className={s.btn} icon={<ArrowLeftOutlined />}>  <NavLink to={'/'}>Вернуться в панель бригад </NavLink> </Button>
                 </div>
                 <HighchartsReact highcharts={Highcharts} options={options}/>
             </div>

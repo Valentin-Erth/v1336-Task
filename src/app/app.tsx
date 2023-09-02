@@ -1,18 +1,10 @@
 import './App.module.css'
-// import {Charts} from "@/features/charts/ui/charts.tsx";
-import {Brigades} from "@/features/brigades/ui/brigades.tsx";
-
-import {FilterSelect} from "@/features/fiter/filter.tsx";
+import {RouterProvider} from "react-router-dom";
+import {router} from "@/pages/routes.tsx";
 
 function App() {
 
-    return (
-        <div>
-            <FilterSelect/>
-            <Brigades/>
-            {/*<Charts/>*/}
-        </div>
-    )
+    return <RouterProvider router={router}/>
 }
 
 export default App

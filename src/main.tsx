@@ -9,6 +9,6 @@ import {GlobalError} from "@/common/components/GlobalError/GlobalError.tsx";
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <Provider store={store}>
         <App/>
-         <GlobalError/>
+        <GlobalError/>
     </Provider>
 )
