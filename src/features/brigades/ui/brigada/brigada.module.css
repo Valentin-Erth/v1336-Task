@@ -2,7 +2,12 @@
     display: flex;
     flex-direction: column;
 }
-
+@media (max-width: 560px) {
+    .card {
+        width: 210px;
+        flex-wrap: wrap;
+    }
+}
 .subTitle {
     margin-top: 0;
     margin-bottom: 0.5em;

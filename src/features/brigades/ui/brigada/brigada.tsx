@@ -19,8 +19,8 @@ export const Brigada = ({cluster, brigadeName, connectionStateId, well, departme
 const status=connection && connection.name === 'Доступен' ? s.green : s.red
     return (
         <Card title={brigadeName} style={{
-            width: "270px", margin: "10px"
-        }}><div className={s.description}>
+            width: "270px",  margin: "10px",
+        }} className={s.card}><div className={s.description}>
             <h3 className={s.subTitle}>{department && department.name}</h3>
             <span className={status}><b>Соединение</b>: {connection && connection.name}</span>
             <span><b>Кластер</b>: {cluster}</span>
