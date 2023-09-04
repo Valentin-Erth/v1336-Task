@@ -4,7 +4,8 @@ import {appActions} from "@/app/app.slice.ts";
 import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
 import {selectError} from "@/app/app.selector.ts";
-
+import 'react-toastify/dist/ReactToastify.css';
+import s from "./GlobalError.module.css"
 
 export const GlobalError = () => {
     const error = useAppSelector(selectError);
@@ -23,9 +24,10 @@ export const GlobalError = () => {
     }, [error]);
 
     return (
+        <div className={s.container}>
         <ToastContainer
             position="top-right"
-            autoClose={5000}
+            autoClose={1000}
             hideProgressBar={false}
             newestOnTop={false}
             closeOnClick
@@ -35,5 +37,6 @@ export const GlobalError = () => {
             pauseOnHover
             theme="colored"
         />
+        </div>
     );
 };

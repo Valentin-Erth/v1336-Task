@@ -48,7 +48,7 @@ const getBrigades = createAsyncThunk('brigades/getBrigades', async (_, thunkAPI)
     dispatch(appActions.setAppStatus("loading"))
     try {
         const res = await brigadesApi.getBrigades()
-        console.log(res)
+        // console.log(res)
         if (res.status === 200) {
             dispatch(appActions.setAppStatus("succeeded"))
             return res.data
