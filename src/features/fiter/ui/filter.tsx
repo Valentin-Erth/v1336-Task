@@ -22,19 +22,21 @@ export const FilterSelect = () => {
     useEffect(() => {
         dispatch(filterThunks.getDepartments())
         dispatch(filterThunks.getConnectStatus())
-    }, [])
+    }, [dispatch])
     const departmentOptions = departments.map(department => ({value: department.id, label: department.name}));
     const connectStatusOptions = connectStatus.map(status => ({value: status.connectionStateId, label: status.name}));
-    const handleDepartmentChange = (value: any) => {
-        if (value === null) {
+    const handleDepartmentChange = (value: number | undefined) => {
+        console.log("Department", value)
+        if (value === undefined) {
             dispatch(resetFilterDepartment());
         } else {
             dispatch(setFilterDepartment(value));
         }
         dispatch(brigadesThunks.getFilteredBrigades());
     };
-    const handleConnectStatusChange = (value: any) => {
-        if (value === null) {
+    const handleConnectStatusChange = (value: number | undefined) => {
+        console.log("Status", value)
+        if (value === undefined) {
             dispatch(resetFilterConnectStatus());
         } else {
             dispatch(setFilterConnectStatus(value));
@@ -50,10 +52,10 @@ export const FilterSelect = () => {
                             onChange={handleConnectStatusChange}/>
                 <BaseSelect title={'Департамент:  '} options={departmentOptions} onChange={handleDepartmentChange}/>
             </div>
-<div  className={s.btn}>
-    <Button icon={<ArrowRightOutlined/>}> <NavLink to={'charts'}>Перейти на
-        график</NavLink> </Button>
-</div>
+            <div className={s.btn}>
+                <Button icon={<ArrowRightOutlined/>}> <NavLink to={'charts'}>Перейти на
+                    график</NavLink> </Button>
+            </div>
 
         </div>
     );

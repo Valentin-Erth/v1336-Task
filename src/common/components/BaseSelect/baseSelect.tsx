@@ -13,7 +13,7 @@ export const BaseSelect = ({options,title,onChange}:BaseSelectPropsType) => {
             <Select
             defaultValue={null}
             style={{width: "150px"}}
-            // allowClear
+            allowClear
             options={options}
             onChange={onChange}/>
         </div>
